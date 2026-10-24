@@ -1,16 +1,16 @@
 # Quadruple inverted pendulum: swing-up and balance
 
-This is my controller for the Koh Young AI Competition 2024 (ICCAS 2024). A cart with four
-links has to be swung up from hanging and balanced at the top, with the force limited to
-±60 N and a 10 ms control period.
+This repository contains a controller that swings a quadruple inverted pendulum up from
+hanging and balances it at the top. The system is a cart with four links in series, driven
+by a horizontal force limited to ±60 N, with a 10 ms control period.
 
-On the competition simulator the pendulum enters the scoring region at 3.64 s and stays there
-for the rest of the 10 s run. The controller needs only numpy at run time.
+The target is the region |θᵢ| ≤ 0.05 rad, |θ̇ᵢ| ≤ 0.05 rad/s and |x| ≤ 0.5 m, held for at
+least 5 s. In simulation the pendulum enters that region at 3.64 s and stays there for the
+rest of the 10 s run. The controller needs only numpy at run time.
 
 ## Running it
 
-The simulator binary is not included. Copy `simulator/base` from the competition package into
-`simulator/`.
+The simulator binary is not included in this repository. Place it at `simulator/base`.
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
@@ -27,8 +27,8 @@ applies a 20 N pulse for 0.1 s at t = 6 s.
 
 ## How it works
 
-1. **System identification.** The parameter table in the problem statement leaves link 4 out,
-   and the listed values for links 2 and 3 do not match the simulator. I recorded 3,000
+1. **System identification.** The published parameter table leaves link 4 out, and the
+   listed values for links 2 and 3 do not match the simulator. I recorded 3,000
    transitions from the simulator and fitted the cart and four-link model to them by least
    squares. The simulator's link masses turn out to be 4/3 of their lengths (0.200, 0.267,
    0.533 and 1.067 kg), with inertias about the centre of mass of 0.0015, 0.0036, 0.0284 and
@@ -61,9 +61,9 @@ applies a 20 N pulse for 0.1 s at t = 6 s.
 
 ## Results
 
-All runs are 10 s on the competition simulator, from the hanging start.
+All runs are 10 s in the simulator, from the hanging start.
 
-| Run | Enters region | Longest hold |
+| Run | Enters target region | Longest hold |
 |---|---|---|
 | Nominal | 3.64 s | 6.37 s |
 | 5 N for 0.1 s at 1.5 s | 3.66 s | 6.35 s |
@@ -72,8 +72,9 @@ All runs are 10 s on the competition simulator, from the hanging start.
 
 ## Lessons learned
 
-My first submission ([qip_system](https://github.com/Awai005/qip_system)) combined tabular
-Q-learning for the swing-up with an LQR for balancing. It did not swing the pendulum up.
+My earlier attempt, [qip_system](https://github.com/Awai005/qip_system), was my entry for
+the Koh Young AI Competition. It combined tabular Q-learning for the swing-up with an LQR for
+balancing. It did not swing the pendulum up.
 Looking back, most of the problems were on the modelling side:
 
 - The Q-table's state bins were too coarse. With bins spanning ±10, every angle in ±π fell
@@ -114,7 +115,7 @@ python -m qip.trajopt      # swingup.npz, a few minutes
 fill_the_code.py   controller (trajectory tracking + LQR), numpy only
 lqr.npz            balancing LQR gain, cost matrix and switching level
 swingup.npz        planned trajectory, forces and tracking gains
-main.py, render/   evaluation script and renderer from the competition package
+main.py, render/   run script and renderer provided with the simulator
 qip/               identification, LQR design, trajectory optimisation, metrics
 simulator/         not tracked; place simulator/base here
 ```
