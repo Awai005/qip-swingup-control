@@ -1,0 +1,20 @@
+# Simulator binary from the competition package (32 MB, not redistributed)
+simulator/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Virtual environments
+rl_env/
+.venv/
+venv/
+
+# Generated outputs
+transitions.txt
+transitions_headless.txt
+sysid_data.npz
+sysid_result.json
+runs/
+*.zip

@@ -1,0 +1,7 @@
+# Runtime (the controller itself; matches the evaluation environment)
+numpy>=2.0
+matplotlib>=3.9
+
+# Only needed to regenerate lqr.npz / swingup.npz (qip/design_lqr.py, qip/trajopt.py, qip/sysid.py)
+scipy>=1.11
+casadi>=3.6
