@@ -10,7 +10,9 @@ rest of the 10 s run. The controller needs only numpy at run time.
 
 ## Running it
 
-The simulator binary is not included in this repository. Place it at `simulator/base`.
+The simulator binary is not included in this repository. Download it from
+[Google Drive](https://drive.google.com/drive/folders/1W8OCpcF4vXqV8Hl5GIfRJ7QrVe83iQ7S) and
+place it at `simulator/base`.
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
@@ -117,7 +119,7 @@ lqr.npz            balancing LQR gain, cost matrix and switching level
 swingup.npz        planned trajectory, forces and tracking gains
 main.py, render/   run script and renderer provided with the simulator
 qip/               identification, LQR design, trajectory optimisation, metrics
-simulator/         not tracked; place simulator/base here
+simulator/         not tracked; download simulator/base from the Google Drive link above
 ```
 
 ## Acknowledgement
